@@ -181,3 +181,5 @@ Based on the above, here's another Vega scatterplot matrix, but this time with t
 ![Kibana Vega Scatterplot Matrix 2](img/kibana_vega_2.png)
 
 Looking at the charts, we get some trivial insights, like the positive linear correlation between brightness and temperature. Since this is weather data, we know the domain and the result may seem obvious. But keep in mind we're not at the stage of getting some advanced insights. We're still at the stage of basic data exploration and experimentation, to simply learn about the quality of the data and to evaluate at a very basic level what we're dealing with.
+
+Note we didn't use any programming to get to this stage. Use what works best for you to get results quickly. For example, all of this could be done in a Jupyter notebook of course. Depending on what you're after, there's no need to do everything in one tool or framework.
