@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "repeat": {
+    "row": [
+      "_source.temperature",
+      "_source.brightness",
+      "_source.solar_voltage",
+      "_source.moisture"
+    ],
+    "column": [
+      "_source.moisture",
+      "_source.solar_voltage",
+      "_source.brightness",
+      "_source.temperature"
+    ]
+  },
+  "config": {"tooltips": "true"},
+  "spec": {
+    "width": 130,
+    "height": 130,
+    "selection": {
+      "brush": {"type": "interval", "resolve": "global"}
+    },
+    "mark": {"type": "point", "tooltip": {"content": "data"}},
+    "data": {
+      "url": {
+        "index": "miyo_outliers",
+        "body": {"size": 10000, "query": {"match_all": {}}}
+      },
+      "format": {"property": "hits.hits"}
+    },
+    "encoding": {
+      "x": {
+        "field": {"repeat": "column"},
+        "type": "quantitative",
+        "scale": {"zero": false}
+      },
+      "y": {
+        "field": {"repeat": "row"},
+        "type": "quantitative",
+        "scale": {"zero": false}
+      },
+      "color": {
+        "field": "_source.ml.outlier_score",
+        "type": "quantitative",
+        "scale": {"range": ["#aaa", "red"]}
+      },
+      "opacity": {
+        "condition": {
+          "selection": "brush",
+          "field": "_source.ml.outlier_score",
+          "type": "quantitative"
+        },
+        "value": 0.05
+      },
+      "size": {
+        "field": "_source.ml.outlier_score",
+        "type": "quantitative",
+        "scale": {"range": [2, 16]}
+      }
+    }
+  }
+}

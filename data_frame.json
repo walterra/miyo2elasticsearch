@@ -1,0 +1,48 @@
+{
+  "id" : "miyo_data_frame",
+  "source" : {
+    "index" : [
+      "miyo"
+    ],
+    "query" : {
+      "match_all" : { }
+    }
+  },
+  "dest" : {
+    "index" : "miyo_data_frame"
+  },
+  "pivot" : {
+    "group_by" : {
+      "@timestamp" : {
+        "date_histogram" : {
+          "field" : "@timestamp",
+          "calendar_interval" : "1h"
+        }
+      }
+    },
+    "aggregations" : {
+      "brightness" : {
+        "avg" : {
+          "field" : "brightness"
+        }
+      },
+      "temperature" : {
+        "avg" : {
+          "field" : "temperature"
+        }
+      },
+      "solar_voltage" : {
+        "avg" : {
+          "field" : "solarVoltage"
+        }
+      },
+      "moisture" : {
+        "avg" : {
+          "field" : "moisture"
+        }
+      }
+    }
+  },
+  "version" : "8.0.0",
+  "create_time" : 1565531553177
+}
